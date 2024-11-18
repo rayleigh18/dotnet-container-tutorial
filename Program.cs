@@ -1,7 +1,7 @@
 ﻿var builder = WebApplication.CreateBuilder(args);
 
-// Add this line to explicitly set the URLs
-builder.WebHost.UseUrls("http://localhost:5000", "https://localhost:5001");
+// Configure Kestrel to use HTTP only
+builder.WebHost.UseUrls("http://+:8080");
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -14,13 +14,11 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    // Set the Swagger endpoint
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-    // Set the Swagger UI at the root
     c.RoutePrefix = "swagger";
 });
 
-// Comment out HTTPS redirection for local development
+// Remove HTTPS redirection
 // app.UseHttpsRedirection();
 
 app.UseAuthorization();

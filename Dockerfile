@@ -15,10 +15,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app ./
 
-# Configure the container to listen on port 5000
-ENV ASPNETCORE_URLS=http://+:5000
+# Configure for HTTP only
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Development
 
-# Expose port 5000
-EXPOSE 5000
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "dotnet-container-tutorial.dll"] 
